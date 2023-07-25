@@ -21,6 +21,7 @@ void bitonic_sort(int *array, size_t size)
  * @start: the start index
  * @end: the end index
  * @d: The direction to sort
+ * @size: the size of the arr
  */
 void bitonicSort(int *arr, size_t start, size_t end, int d, size_t size)
 {
