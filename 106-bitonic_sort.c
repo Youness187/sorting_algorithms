@@ -1,6 +1,6 @@
 #include "sort.h"
 void swap_arr(int *a, int *b);
-void bitonicSort(int *arr, size_t start, size_t end, int d);
+void bitonicSort(int *arr, size_t start, size_t end, int d, size_t size);
 void bitonic_merge(int *arr, size_t start, size_t end, int d);
 /**
  * bitonic_sort - function that sorts an array of integers
@@ -13,7 +13,7 @@ void bitonic_sort(int *array, size_t size)
 	if (array == NULL || size < 2)
 		return;
 
-	bitonicSort(array, 0, size, 1);
+	bitonicSort(array, 0, size, 1, size);
 }
 /**
  * bitonicSort - Convert an array of integers into a bitonic sequence
@@ -22,7 +22,7 @@ void bitonic_sort(int *array, size_t size)
  * @end: the end index
  * @d: The direction to sort
  */
-void bitonicSort(int *arr, size_t start, size_t end, int d)
+void bitonicSort(int *arr, size_t start, size_t end, int d, size_t size)
 {
 	size_t k;
 	char *str = (d == 1) ? "UP" : "DOWN";
@@ -31,14 +31,14 @@ void bitonicSort(int *arr, size_t start, size_t end, int d)
 		return;
 	k = end / 2;
 
-	printf("Merging [%lu/%lu] (%s):\n", start, end, str);
+	printf("Merging [%lu/%lu] (%s):\n", end, size, str);
 	print_array(arr + start, end);
 
-	bitonicSort(arr, start, k, 1);
-	bitonicSort(arr, start + k, k, 0);
+	bitonicSort(arr, start, k, 1, size);
+	bitonicSort(arr, start + k, k, 0, size);
 	bitonic_merge(arr, start, end, d);
 
-	printf("Result [%lu/%lu] (%s):\n", start, end, str);
+	printf("Result [%lu/%lu] (%s):\n", end, size, str);
 	print_array(arr + start, end);
 }
 /**
